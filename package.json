@@ -1,11 +1,12 @@
 {
   "name": "gic-xml-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "用于小程序DSL的XML解析器",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/ghwghw4/gic-xml-parser",
   "scripts": {
     "run": "tsc --watch",
     "test": "jest --colors --coverage"
