@@ -1,5 +1,5 @@
 {
-  "name": "@gic/xml-parser",
+  "name": "gic-xml-parser",
   "version": "1.0.0",
   "description": "用于小程序DSL的XML解析器",
   "main": "dist/index.js",
@@ -15,6 +15,5 @@
   "devDependencies": {
     "jest": "^26.6.3",
     "json5": "^2.2.0"
-  },
-  "dependencies": {}
+  }
 }
