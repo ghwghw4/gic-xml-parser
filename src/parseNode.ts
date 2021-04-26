@@ -73,11 +73,10 @@ function moveToCloseTag(context: ScanContext, tagName): boolean {
     return true;
   }
 
-  // @ts-ignore
   if (content.startsWith('</')) {
     const name = content.substring(2, content.length - 1).trim();
     if (name !== tagName) {
-      throw new Error('闭合标签不正确:' + tagName)
+      throw new Error(`闭合标签不正确,期望:${tagName},实际:${name}`)
     }
   } else {
     throw new Error(`未找到标签:${tagName} 的结束位置`);

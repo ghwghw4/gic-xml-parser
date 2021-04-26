@@ -36,9 +36,9 @@ export class ScanContext {
     return this.currentIndex
   }
 
-  moveSteps(steps) {
+  moveSteps(steps: number) {
     this.currentIndex += steps;
-    if(this.isScanOver){
+    if (this.isScanOver) {
       this.currentIndex = this.input.length - 1;
     }
   }
@@ -48,9 +48,9 @@ export class ScanContext {
     return this.input.substring(start, end);
   }
 
-  printLeft(){
-    console.log(this.input.substring(this.currentIndex))
-  }
+  // printLeft() {
+  //   console.log(this.input.substring(this.currentIndex))
+  // }
 }
 
 
