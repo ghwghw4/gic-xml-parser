@@ -1,5 +1,6 @@
 
-import { ScanContext, TagNode } from './ScanContext';
+import { TagNode } from './interface';
+import { PositionOffset, ScanContext } from './ScanContext';
 
 // 提取注释
 export default function TakeComment(context: ScanContext, parentNode: TagNode) {
@@ -9,9 +10,11 @@ export default function TakeComment(context: ScanContext, parentNode: TagNode) {
     throw new Error('未找到注释 闭合标签');
   }
   const text = context.getString(start, endIndex + start);
-  context.moveSteps(3 + endIndex);
+  context.moveSteps(endIndex + 3);
   parentNode.childNodes.push({
     nodeType: '#comment',
-    value: text
+    value: text,
+    start: start - PositionOffset - 4,
+    end: context.currentIndex - PositionOffset - 1
   })
 }

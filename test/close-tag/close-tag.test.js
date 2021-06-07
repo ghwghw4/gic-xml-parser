@@ -1,16 +1,31 @@
-const parser = require('../dist/index').default;
+const parser = require('../../dist/index').default;
+const utils = require('../utils');
 
 describe('闭合标签带空格', function () {
   it('case1', () => {
     const xml = `<div></ div>`;
     const result = parser(xml);
-    expect(result).toEqual({ nodeType: 'tag', tagName: 'div', childNodes: [], attrs: [] });
+    expect(result).toEqual({
+      nodeType: 'tag',
+      tagName: 'div',
+      childNodes: [],
+      attrs: {},
+      start: 0,
+      end: 11,
+    });
   });
 
   it('case2', () => {
     const xml = `<div></ div >`;
     const result = parser(xml);
-    expect(result).toEqual({ nodeType: 'tag', tagName: 'div', childNodes: [], attrs: [] });
+    expect(result).toEqual({
+      nodeType: 'tag',
+      tagName: 'div',
+      childNodes: [],
+      attrs: {},
+      start: 0,
+      end: 12,
+    });
   });
 
 
@@ -28,22 +43,32 @@ describe('闭合标签带空格', function () {
 
   // 自我闭合
   it('case1', () => {
-    const xml = `<div>
-  <a/>
-  </div>`;
-    const result = parser(xml);
+    const result = parser(utils.readXml('./test/close-tag/1.xml'));
     expect(result).toEqual({
       nodeType: 'tag',
       tagName: 'div',
-      childNodes: [{ nodeType: 'tag', tagName: 'a', childNodes: [], attrs: [] }],
-      attrs: []
+      childNodes: [
+        {
+          nodeType: 'tag',
+          tagName: 'a',
+          childNodes: [],
+          attrs: {},
+          start: 10,
+          end: 14,
+        },
+      ],
+      attrs: {},
+      start: 0,
+      end: 21,
     });
 
     expect(parser('<div/>')).toEqual({
       nodeType: 'tag',
       tagName: 'div',
       childNodes: [],
-      attrs: []
+      attrs: {},
+      start: 0,
+      end: 5,
     });
   });
 

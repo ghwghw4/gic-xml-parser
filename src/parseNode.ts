@@ -1,7 +1,8 @@
-import { ScanContext, TagNode } from './ScanContext';
+import { PositionOffset, ScanContext } from './ScanContext';
 import ParseAttribute from './parseAttribute';
 import TakeText from './takeText'
 import TakeComment from './takeComment'
+import { TagNode } from './interface';
 
 export default function ParseTagNode(context: ScanContext, parentNode: TagNode): boolean {
   if (context.isScanOver) {
@@ -9,10 +10,11 @@ export default function ParseTagNode(context: ScanContext, parentNode: TagNode):
   }
   TakeText(context, parentNode);
 
-  const tagName = takeOpenTag(context);
-  if (!tagName) {
+  const nameInfo = takeOpenTag(context);
+  if (!nameInfo) {
     return false;
   }
+  const { name: tagName, startIndex } = nameInfo;
 
   if (tagName.startsWith('!--')) {
     const diff = tagName.length - 3;
@@ -29,7 +31,9 @@ export default function ParseTagNode(context: ScanContext, parentNode: TagNode):
     nodeType: 'tag',
     tagName,
     childNodes: [],
-    attrs: []
+    attrs: {},
+    start: startIndex - PositionOffset,
+    end: startIndex
   }
 
   // 解析属性
@@ -46,6 +50,7 @@ export default function ParseTagNode(context: ScanContext, parentNode: TagNode):
   }
   // 移动到闭合标签
   moveToCloseTag(context, tagName)
+  tagNode.end = context.currentIndex - PositionOffset;
   parentNode.childNodes.push(tagNode);
   return true;
 }
@@ -60,7 +65,11 @@ function takeOpenTag(context: ScanContext) {
   context.moverToChars(' />');
   const endIndex = context.currentIndex;
   const name = context.getString(startIndex + 1, endIndex)
-  return name;
+  return {
+    name,
+    startIndex,
+    endIndex
+  };
 }
 
 function moveToCloseTag(context: ScanContext, tagName): boolean {

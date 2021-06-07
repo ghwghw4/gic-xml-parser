@@ -1,3 +1,4 @@
+export const PositionOffset = 6;
 export class ScanContext {
   private input: string;
   currentIndex = 0;
@@ -51,18 +52,4 @@ export class ScanContext {
   // printLeft() {
   //   console.log(this.input.substring(this.currentIndex))
   // }
-}
-
-
-export interface TagNode {
-  nodeType: string;
-  tagName?: string;
-  childNodes?: Array<TagNode>;
-  value?: string;
-  attrs?: Array<TagAttribute>;
-}
-
-export interface TagAttribute {
-  name: string;
-  value: any;
 }

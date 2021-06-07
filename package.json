@@ -8,7 +8,7 @@
   ],
   "homepage": "https://github.com/ghwghw4/gic-xml-parser",
   "scripts": {
-    "run": "tsc --watch",
+    "dev": "tsc --watch",
     "test": "jest --colors --coverage"
   },
   "author": "",

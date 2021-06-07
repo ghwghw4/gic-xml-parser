@@ -1,4 +1,5 @@
-import { ScanContext, TagNode, TagAttribute } from './ScanContext';
+import { TagNode } from './interface';
+import { PositionOffset, ScanContext } from './ScanContext';
 
 export default function (context: ScanContext, tagNode: TagNode) {
   while (!context.isScanOver) {
@@ -18,27 +19,29 @@ function parseAttibute(context: ScanContext, tagNode: TagNode) {
   const end = context.moverToChars('=/>')
   const attName = context.getString(start, end);
   if (' />'.indexOf(context.currentChar) >= 0) { //布尔属性
-    tagNode.attrs.push({
-      name: attName,
-      value: true
-    });
+    tagNode.attrs[attName] = {
+      value: true,
+      start: end - PositionOffset, // 属性名的最后一个字符
+      end: end - PositionOffset
+    };
     return;
   }
 
-  const value = parseAttValue(context);
+  const { value, start: valueStartIndex, end: valueEndIndex } = parseAttValue(context);
   var attNames = attName.split(' ').filter(a => a);
-
   attNames.forEach((att, index) => {
     if (index === attNames.length - 1) {
-      tagNode.attrs.push({
-        name: att,
-        value
-      })
+      tagNode.attrs[att] = {
+        value,
+        start: valueStartIndex - PositionOffset + 1,
+        end: valueEndIndex - PositionOffset - 1
+      };
     } else {
-      tagNode.attrs.push({
-        name: att,
-        value: true
-      })
+      tagNode.attrs[att] = {
+        value: true,
+        start: start - PositionOffset + att.length - 1, // 属性名的最后一个字符
+        end: start - PositionOffset + att.length - 1
+      };
     }
   });
 }
@@ -50,5 +53,9 @@ function parseAttValue(context: ScanContext) {
   const end = context.moverToChars(`${char}`)
   context.moveSteps(1);
   const value = context.getString(start + 1, end);
-  return value;
+  return {
+    value,
+    start,
+    end
+  };
 }

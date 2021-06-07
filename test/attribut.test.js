@@ -8,7 +8,20 @@ describe('属性解析', function () {
             nodeType: 'tag',
             tagName: 'div',
             childNodes: [],
-            attrs: [{ name: 'a', value: 'ba' }, { name: 'c', value: 'kjshdskaj' }]
+            attrs: {
+                a: {
+                    value: 'ba',
+                    start: 8,
+                    end: 9,
+                },
+                c: {
+                    value: 'kjshdskaj',
+                    start: 16,
+                    end: 24,
+                },
+            },
+            start: 0,
+            end: 32,
         });
     });
 
@@ -19,25 +32,53 @@ describe('属性解析', function () {
             nodeType: 'tag',
             tagName: 'div',
             childNodes: [],
-            attrs: [
-                { name: 'uer', value: true },
-                { name: 'a', value: 'ba' },
-                { name: 'c', value: 'kjshdskaj' },
-                { name: 'nvv', value: 'sad' },
-                { name: 'dsad', value: true }
-            ]
+            attrs: {
+                uer: {
+                    value: true,
+                    start: 7,
+                    end: 7,
+                },
+                a: {
+                    value: 'ba',
+                    start: 12,
+                    end: 13,
+                },
+                c: {
+                    value: 'kjshdskaj',
+                    start: 21,
+                    end: 29,
+                },
+                nvv: {
+                    value: 'sad',
+                    start: 39,
+                    end: 41,
+                },
+                dsad: {
+                    value: true,
+                    start: 48,
+                    end: 48,
+                },
+            },
+            start: 0,
+            end: 54,
         });
 
         expect(parser('<div a/>')).toEqual({
             nodeType: 'tag',
             tagName: 'div',
             childNodes: [],
-            attrs: [
-                { name: 'a', value: true },
-            ]
+            attrs: {
+                a: {
+                    value: true,
+                    start: 6,
+                    end: 6,
+                },
+            },
+            start: 0,
+            end: 7,
         });
     });
-    
+
 
 
     // 不正确的

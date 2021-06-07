@@ -1,5 +1,6 @@
+import { TagNode } from './interface';
 import ParseNode from './parseNode';
-import { ScanContext, TagNode } from './ScanContext';
+import { ScanContext } from './ScanContext';
 
 
 export default function parse(input): null | TagNode | TagNode[] {
@@ -9,8 +10,10 @@ export default function parse(input): null | TagNode | TagNode[] {
     nodeType: 'tag',
     tagName: 'document',
     childNodes: [],
-    attributes: []
-  };
+    attributes: [],
+    start: 0,
+    end: 0
+  } as TagNode;
   ParseNode(context, document)
   const root = document.childNodes[0];
   if (root.childNodes.length === 1)
