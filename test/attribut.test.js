@@ -79,7 +79,30 @@ describe('属性解析', function () {
         });
     });
 
-
+    it('case3-换行', () => {
+        const xml = `<div a="ba" 
+        c="kjshdskaj"></div>`;
+        const result = parser(xml);
+        expect(result).toEqual({
+            nodeType: 'tag',
+            tagName: 'div',
+            childNodes: [],
+            attrs: {
+                a: {
+                    value: 'ba',
+                    start: 8,
+                    end: 9,
+                },
+                c: {
+                    value: 'kjshdskaj',
+                    start: 24,
+                    end: 32,
+                },
+            },
+            start: 0,
+            end: 40,
+        });
+    });
 
     // 不正确的
 

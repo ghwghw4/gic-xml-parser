@@ -31,7 +31,7 @@ describe('混合', function () {
                         start: 43,
                         end: 51,
                     },
-                    'b ': {
+                    'b': {
                         value: true,
                         start: 56,
                         end: 56,
