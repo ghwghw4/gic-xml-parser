@@ -64,7 +64,7 @@ function takeOpenTag(context: ScanContext) {
   const startIndex = context.currentIndex;
   context.moverToChars(' />');
   const endIndex = context.currentIndex;
-  const name = context.getString(startIndex + 1, endIndex)
+  const name = context.getString(startIndex + 1, endIndex).trim()
   return {
     name,
     startIndex,
