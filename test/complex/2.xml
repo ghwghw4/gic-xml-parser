@@ -1,0 +1,9 @@
+<video 
+      loop controls 
+      bindfullscreenchange="fullscreenchange" 
+      vslide-gesture 
+      vslide-gesture-in-fullscreen 
+      autoplay 
+      enable-play-gesture
+    >
+</video>

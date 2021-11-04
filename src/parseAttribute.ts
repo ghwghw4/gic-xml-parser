@@ -16,7 +16,7 @@ export default function (context: ScanContext, tagNode: TagNode) {
 
 function parseAttibute(context: ScanContext, tagNode: TagNode) {
   const start = context.currentIndex;
-  const end = context.moverToChars('=/>')
+  const end = context.moverToChars('=/> ')
   const attName = context.getString(start, end).trim();
   if (!attName) return;
   if (' />'.indexOf(context.currentChar) >= 0) { //布尔属性

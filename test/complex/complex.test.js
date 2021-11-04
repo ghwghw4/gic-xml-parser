@@ -23,18 +23,18 @@ describe('混合', function () {
                 attrs: {
                     a: {
                         value: true,
-                        start: 36,
-                        end: 36,
+                        start: 37,
+                        end: 37,
                     },
                     src: {
                         value: './01.axml',
                         start: 43,
                         end: 51,
                     },
-                    'b': {
+                    b: {
                         value: true,
-                        start: 56,
-                        end: 56,
+                        start: 55,
+                        end: 55,
                     },
                 },
                 start: 28,
@@ -148,5 +148,53 @@ describe('混合', function () {
                 end: 256,
             },
         ]);
+    });
+
+    it('case2', () => {
+        const result = parser(utils.readXml('./test/complex/2.xml'));
+        expect(result).toEqual({
+            nodeType: 'tag',
+            tagName: 'video',
+            childNodes: [],
+            attrs: {
+                loop: {
+                    value: true,
+                    start: 18,
+                    end: 18,
+                },
+                controls: {
+                    value: true,
+                    start: 27,
+                    end: 27,
+                },
+                bindfullscreenchange: {
+                    value: 'fullscreenchange',
+                    start: 57,
+                    end: 72,
+                },
+                'vslide-gesture': {
+                    value: true,
+                    start: 96,
+                    end: 96,
+                },
+                'vslide-gesture-in-fullscreen': {
+                    value: true,
+                    start: 132,
+                    end: 132,
+                },
+                autoplay: {
+                    value: true,
+                    start: 148,
+                    end: 148,
+                },
+                'enable-play-gesture': {
+                    value: true,
+                    start: 176,
+                    end: 176,
+                },
+            },
+            start: 0,
+            end: 189,
+        });
     });
 });
